@@ -8,7 +8,6 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [inputValue, setInputValue] = React.useState("");
   const [movieToFind, setMovieToFind] = React.useState("");
-  // const [initialRender, setRender] = React.useState(false);
 
   const getMovies = async () => {
     setMovieToFind(inputValue.trim().toLowerCase());
@@ -40,6 +39,7 @@ function App() {
         <input
           type="text"
           value={inputValue}
+          placeholder={movieToFind}
           onChange={e => setInputValue(e.target.value)}
         />
         <button onClick={getMovies}>Find Movie!</button>

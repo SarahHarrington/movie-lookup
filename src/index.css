@@ -72,6 +72,10 @@ header {
   background: linear-gradient(to right, var(--orange), #e8dab2, #4f6d7a);
 }
 
+/* .movie-icon {
+  width: 10rem;
+} */
+
 .movie-poster {
   max-width: 20%;
   height: auto;
@@ -79,6 +83,10 @@ header {
 
 .movie-title {
   font-size: 1.5rem;
+}
+
+.movie-details {
+  display: none;
 }
 
 .movie-rating {
