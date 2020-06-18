@@ -1,4 +1,4 @@
-# Moovie Looker
+# Movie Looker
 
 This app was created with React so I could learn hooks!
 
