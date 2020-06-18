@@ -8,12 +8,17 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [inputValue, setInputValue] = React.useState("");
   const [movieToFind, setMovieToFind] = React.useState("");
+  const [movieNotFound, setMovieNotFound] = React.useState("showMovies");
 
   const getMovies = async () => {
     setMovieToFind(inputValue.trim().toLowerCase());
     setInputValue("");
 
   };
+
+  React.useEffect(() => {
+
+  }, [movieNotFound])
 
   React.useEffect(() => {
     if (movieToFind === '') {
@@ -25,7 +30,16 @@ function App() {
         )
         .then(res => res.json())
         .then(res => {
-          setMovies(res.Search);
+          console.log(res.Response)
+          if (res.Response === 'False') {
+            console.log('in the false')
+            setMovieNotFound("hide")
+          }
+          else {
+            console.log('in the true')
+            setMovieNotFound("showMovies")
+            setMovies(res.Search);
+          }
         })
         .catch(e => console.log("error", e));
       }
@@ -44,16 +58,16 @@ function App() {
         />
         <button onClick={getMovies}>Find Movie!</button>
       </div>
-      { 
-        movies.length > 0 && 
-        movies.map(movie => (
-          <MovieListItem 
-            key={movie.imdbID}
-            movie={movie}
-          />
-        ))
+      {movieNotFound === "showMovies" ?
+          movies.length > 0 && 
+          movies.map(movie => (
+            <MovieListItem 
+              key={movie.imdbID}
+              movie={movie}
+          /> 
+        )) :
+        <div>Movie Not Found!</div>
       }
-
     </div>
   );
 }
