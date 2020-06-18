@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
 function MovieList (props) {
   // console.log(props.movie)
   const {Poster, Title, Year, imdbID, Type} = props.movie;
@@ -11,8 +13,7 @@ function MovieList (props) {
     setShowDetails(true);
     const movieIDToSearch = e.currentTarget.name;
     // console.log('the movie link was clicked', e.currentTarget.name)
-
-    fetch(`https://www.omdbapi.com/?&apikey=9504059f&type=movie&i=${movieIDToSearch}`)
+    fetch(`https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&i=${movieIDToSearch}`)
       .then(res => res.json())
       .then(res => setMovieDetails({...res}))
       .catch(e => console.log('oops', e))

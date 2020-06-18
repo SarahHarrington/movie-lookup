@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import MovieListItem from './components/MovieListItem';
 
+const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+
 function App() {
 
   const [movies, setMovies] = React.useState([]);
@@ -20,7 +22,7 @@ function App() {
     } else {
       
       fetch(
-        `https://www.omdbapi.com/?&apikey=9504059f&type=movie&s=${movieToFind}`
+        `https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&s=${movieToFind}`
         )
         .then(res => res.json())
         .then(res => {
