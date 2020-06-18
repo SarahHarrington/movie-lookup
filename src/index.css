@@ -89,6 +89,11 @@ header {
   display: none;
 }
 
+.movie-ratings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .movie-rating {
   font-weight: bold;
 }
