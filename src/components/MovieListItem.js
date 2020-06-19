@@ -13,16 +13,13 @@ function MovieList (props) {
   async function getMovieDetails(e) {
     e.preventDefault();
     setMovieIdToSearch(e.currentTarget.name)
-    console.log('movie id to search', movieIDToSearch)
     setShowDetails(true);
-
   }
 
   React.useEffect(() => {
     if (movieIDToSearch === '') {
       return
     } else {
-      console.log('fetch!', movieIDToSearch)
       fetch(`https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&i=${movieIDToSearch}&plot=full`)
       .then(res => res.json())
       .then(res => {
@@ -40,15 +37,15 @@ function MovieList (props) {
 
   return (
     <div className="movie-item">
-      <div >
+      <div className="movie-poster-wrapper">
         { Poster === 'N/A' ?
           <span className="material-icons movie-icon">movie</span> : 
           <img className="movie-poster" src={Poster} alt={Title}/>
         }
 
       </div>
-      <div>
-        <div>
+      <div className="movie-details">
+        
           <h1 className="movie-title">{Title} ({Year})</h1>
           
           {showDetails ?  
@@ -86,7 +83,7 @@ function MovieList (props) {
               className="button">Show More</button>
           }
         </div>
-      </div>
+      
     </div>
     
   )
