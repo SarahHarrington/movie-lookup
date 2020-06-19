@@ -25,6 +25,7 @@ input {
   margin: 10px;
   border-style: groove;
   height: 2rem;
+  color: var(--oxford-blue);
 }
 
 .button {
@@ -150,6 +151,7 @@ header > h1 {
   display: grid;
   font-size: 2rem;
   text-align: center;
+  color: var(--oxford-blue);
 }
 
 .movie-pages {

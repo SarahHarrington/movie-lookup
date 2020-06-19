@@ -127,7 +127,10 @@ function App() {
               movie={movie}
               /> 
               )) :
-              <div className="movie-not-found slide-in">
+          <div className="movie-not-found slide-in">
+            <span class="material-icons movie-not-found">
+              confirmation_number
+            </span>
             <p>No Movies Found!</p>
           </div>
         }
