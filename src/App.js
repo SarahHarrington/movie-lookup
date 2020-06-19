@@ -50,7 +50,6 @@ function App() {
 
   function getNextPage(e) {
     e.preventDefault();
-    console.log('get previous page', e.currentTarget.name)
     getMoreMovies(e.currentTarget.name)
   }
 
@@ -59,27 +58,24 @@ function App() {
     if (e.currentTarget.name === 0) {
       return
     } else {
-      console.log('get next page', e.currentTarget.name)
       getMoreMovies(e.currentTarget.name)
     }
   }
 
   function checkForNextPage(pageNumber) {
-    console.log('page number being checked for', pageNumber)
     fetch(
       `https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&s=${movieToFind}&page=${pageNumber}`
       )
       .then(res => res.json())
       .then(res => {
         if (res.Response === 'False') {
-          console.log('no more pages')
           setNextPage(false)
           return
         } else {
-          console.log('there are more movies!')
           setNextPage(true);
         }
       })
+      .catch(e => console.log('Something went wrong!'))
   }
 
   function getMoreMovies(pageNumber) {
@@ -96,6 +92,7 @@ function App() {
           setCurrentMovies(res.Search)
         }
       })
+      .catch(e => console.log('Something went wrong!'))
   }
 
   return (

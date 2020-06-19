@@ -50,26 +50,36 @@ function MovieList (props) {
           
           {showDetails ?  
             <div>
-              
-              { 
-                movieDetails.Rated !== 'N/A' ? 
-                <p>{movieDetails.Rated}</p> :
-                <></>
-              }
-              
-              <p>
-                <span className="material-icons">schedule</span>
-                {movieDetails.Runtime}
-              </p>
+              <div className="rating-runtime">
+                { 
+                  movieDetails.Rated !== 'N/A' ? 
+                  <p><span className="movie-details-label">Rated </span>{movieDetails.Rated}</p> :
+                  <></>
+                }
+                
+                <p>
+                  <span className="material-icons">schedule</span>
+                  <span className="movie-details-label">length </span>{movieDetails.Runtime}
+                </p>
+              </div>
               <p>{movieDetails.Plot}</p>
               <p>
                 <span className="movie-details-label">Genre </span>
                 {movieDetails.Genre}
               </p>
+              <p>
+                <span className="movie-details-label">Release Date </span>{movieDetails.Released}
+              </p>
+              <p>
+                <span className="movie-details-label">Directed by </span>{movieDetails.Director}</p>
+              {movieDetails.Writer !== 'N/A' &&
+                <p><span className="movie-details-label">Written by </span>{movieDetails.Writer}</p>
+              }
               {movieRatings ? 
-                <Rating 
-                  ratings={movieDetails.Ratings}
-                /> :
+                <>
+                  <h3>Ratings</h3>
+                  <Rating ratings={movieDetails.Ratings}/> 
+                </> :
                 <></>
               }
               <button 

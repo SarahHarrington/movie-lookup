@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Rating(props) {
-  console.log('ratings', props)
   const {ratings} = props;
 
   return (
@@ -11,7 +10,7 @@ function Rating(props) {
           className="movie-ratings"
           key={rating.Source}
         >
-          <p>{rating.Source}</p>
+          <p className="movie-details-label">{rating.Source}</p>
           <p>{rating.Value}</p>
         </div>
       ))
