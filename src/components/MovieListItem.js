@@ -56,13 +56,21 @@ function MovieList (props) {
                   <p><span className="movie-details-label">Rated </span>{movieDetails.Rated}</p> :
                   <></>
                 }
-                
-                <p>
-                  <span className="material-icons">schedule</span>
-                  <span className="movie-details-label">length </span>{movieDetails.Runtime}
-                </p>
+                {
+                  movieDetails.Runtime !== 'N/A' ? 
+                  <p>
+                    <span className="material-icons">schedule</span>
+                    <span className="movie-details-label">length </span>{movieDetails.Runtime}
+                  </p>
+                  : <></>
+                }
               </div>
-              <p>{movieDetails.Plot}</p>
+              {
+                movieDetails.Plot !== 'N/A' ?
+                <p>{movieDetails.Plot}</p> : 
+                <> </>
+              }
+
               <p>
                 <span className="movie-details-label">Genre </span>
                 {movieDetails.Genre}
@@ -77,7 +85,6 @@ function MovieList (props) {
               }
               {movieRatings ? 
                 <>
-                  <h3>Ratings</h3>
                   <Rating ratings={movieDetails.Ratings}/> 
                 </> :
                 <></>

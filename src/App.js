@@ -141,7 +141,10 @@ function App() {
             name={parseInt(currentPage - 1)}
             onClick={getPreviousPage}>Previous Page</button>
           }
-          <p className="current-page">{currentPage}</p>
+          {
+            currentPage > 1 &&
+            <p className="current-page">{currentPage}</p>
+          }
           {nextPage &&
             <button 
               className="button next-button"

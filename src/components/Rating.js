@@ -5,6 +5,10 @@ function Rating(props) {
 
   return (
     <>
+      {ratings.length === 0 ?
+        <> </> : 
+        <h3 className="ratings-header">Ratings</h3>
+      }
       {ratings.map(rating => (
         <div 
           className="movie-ratings"
