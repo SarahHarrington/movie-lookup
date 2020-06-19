@@ -15,6 +15,7 @@ function MovieList (props) {
     setMovieIdToSearch(e.currentTarget.name)
     console.log('movie id to search', movieIDToSearch)
     setShowDetails(true);
+
   }
 
   React.useEffect(() => {
@@ -52,21 +53,37 @@ function MovieList (props) {
           
           {showDetails ?  
             <div>
-              <p>{movieDetails.Rated}</p>
+              
+              { 
+                movieDetails.Rated !== 'N/A' ? 
+                <p>{movieDetails.Rated}</p> :
+                <></>
+              }
+              
               <p>
-                <span className="material-icons">watch</span>
+                <span className="material-icons">schedule</span>
                 {movieDetails.Runtime}
               </p>
               <p>{movieDetails.Plot}</p>
-              <p>{movieDetails.Genre}</p>
+              <p>
+                <span className="movie-details-label">Genre </span>
+                {movieDetails.Genre}
+              </p>
               {movieRatings ? 
-                <Rating ratings={movieDetails.Ratings}/> :
-                <p></p>
+                <Rating 
+                  ratings={movieDetails.Ratings}
+                /> :
+                <></>
               }
-              <button onClick={hideMovieDetails}>Show Less</button>
+              <button 
+                onClick={hideMovieDetails}
+                className="button">Show Less</button>
             </div> 
             :
-            <button name={imdbID} onClick={getMovieDetails}>Show More</button>
+            <button 
+              name={imdbID} 
+              onClick={getMovieDetails}
+              className="button">Show More</button>
           }
         </div>
       </div>

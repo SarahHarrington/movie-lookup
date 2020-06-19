@@ -4,10 +4,12 @@
   --orange: #dd6e42;
   --platinum: #eaeaea;
   --cadet: #4f6d7a;
+  --Anton: "Anton", sans-serif;
 }
 
 body {
   display: grid;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--platinum);
@@ -21,7 +23,7 @@ input {
   height: 2rem;
 }
 
-button {
+.button {
   margin: 10px;
   background: var(--orange);
   height: 3rem;
@@ -34,7 +36,7 @@ button {
   font-size: 1.5rem;
 }
 
-button:hover {
+.button:hover {
   background: #e8dab2;
   border: solid 3px var(--orange);
 }
@@ -44,16 +46,18 @@ img {
 }
 
 header {
-  font-family: "Anton", sans-serif;
-  font-size: 4rem;
+  font-family: var(--Anton);
   text-align: center;
   color: var(--cadet);
   margin: 30px;
 }
 
-.App {
-  font-family: sans-serif;
-  text-align: left;
+header > h1 {
+  font-size: 4rem;
+}
+
+.visually-hidden {
+  display: none;
 }
 
 .search-form {
@@ -61,24 +65,32 @@ header {
   justify-items: center;
 }
 
+.movie-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
 .movie-item {
   display: grid;
   justify-content: center;
+  justify-self: center;
   grid-template-columns: 1fr 1fr;
   padding: 20px;
   background: #c0d6df;
   margin: 20px;
+  width: 70vw;
   border-radius: 0.2em;
   background: linear-gradient(to right, var(--orange), #e8dab2, #4f6d7a);
 }
 
-/* .movie-icon {
-  width: 10rem;
-} */
+.movie-icon {
+  font-size: 10rem;
+}
 
 .movie-poster {
-  max-width: 20%;
-  height: auto;
+  width: auto;
+  max-height: 20vh;
 }
 
 .movie-title {
@@ -89,6 +101,12 @@ header {
   display: none;
 }
 
+.movie-details-label {
+  text-transform: uppercase;
+  font-family: 'Anton';
+  font-size: 1.3rem;
+}
+
 .movie-ratings {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -96,4 +114,10 @@ header {
 
 .movie-rating {
   font-weight: bold;
+}
+
+.movie-not-found {
+  display: grid;
+  font-size: 2rem;
+  text-align: center;
 }

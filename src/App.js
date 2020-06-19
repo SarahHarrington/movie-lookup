@@ -3,17 +3,48 @@ import MovieListItem from './components/MovieListItem';
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
+// function useKey(key) {
+//   // Keep track of key state
+//   const [pressed, setPressed] = useState(false)
+
+//   // Does an event match the key we're watching?
+//   const match = event => key.toLowerCase() == event.key.toLowerCase()
+
+//   // Event handlers
+//   const onDown = event => {
+//       if (match(event)) setPressed(true)
+//   }
+
+//   const onUp = event => {
+//       if (match(event)) setPressed(false)
+//   }
+
+//   // Bind and unbind events
+//   useEffect(() => {
+//       window.addEventListener("keydown", onDown)
+//       window.addEventListener("keyup", onUp)
+//       return () => {
+//           window.removeEventListener("keydown", onDown)
+//           window.removeEventListener("keyup", onUp)
+//       }
+//   }, [key])
+
+//   return pressed
+// }
+
 function App() {
+  // const enterKey = useKey('enter');
+  // console.log(enterKey);
 
   const [movies, setMovies] = React.useState([]);
   const [inputValue, setInputValue] = React.useState("");
   const [movieToFind, setMovieToFind] = React.useState("");
   const [movieNotFound, setMovieNotFound] = React.useState("showMovies");
 
-  const getMovies = async () => {
+  const getMovies = async (e) => {
+    e.preventDefault();
     setMovieToFind(inputValue.trim().toLowerCase());
     setInputValue("");
-
   };
 
   React.useEffect(() => {
@@ -21,6 +52,7 @@ function App() {
   }, [movieNotFound])
 
   React.useEffect(() => {
+    
     if (movieToFind === '') {
       return
     } else {
@@ -48,26 +80,41 @@ function App() {
 
   return (
     <div className="App">
-      <header>Find a Movie</header>
-      <div className="search-form">
+      <header>
+        <h1>Find a Movie</h1>
+      </header>
+      <form 
+        className="search-form"
+        onSubmit={getMovies}>
+        <label 
+          className="visually-hidden"
+          htmlFor="moviesearchfield"></label>
         <input
           type="text"
+          name="moviesearchfield"
           value={inputValue}
           placeholder={movieToFind}
           onChange={e => setInputValue(e.target.value)}
         />
-        <button onClick={getMovies}>Find Movie!</button>
-      </div>
-      {movieNotFound === "showMovies" ?
-          movies.length > 0 && 
-          movies.map(movie => (
-            <MovieListItem 
+        <input 
+          type="submit" 
+          value="Find Movie"
+          className="button"/>
+      </form>
+      <div className="movie-list">
+        {movieNotFound === "showMovies" ?
+            movies.length > 0 && 
+            movies.map(movie => (
+              <MovieListItem 
               key={movie.imdbID}
               movie={movie}
-          /> 
-        )) :
-        <div>Movie Not Found!</div>
-      }
+              /> 
+              )) :
+              <div className="movie-not-found slide-in">
+            <p>No Movies Found!</p>
+          </div>
+        }
+      </div>
     </div>
   );
 }

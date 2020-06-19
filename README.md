@@ -9,3 +9,4 @@ This is a work in progress, here's some stuff I'd like to add:
 - [ ] Mobile responsiveness
 - [ ] Conditional formatting for movie details
 - [ ] Nicer not found & error messages
+- [ ] a11y

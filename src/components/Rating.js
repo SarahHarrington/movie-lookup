@@ -5,7 +5,7 @@ function Rating(props) {
   const {ratings} = props;
 
   return (
-    <div>
+    <>
       {ratings.map(rating => (
         <div 
           className="movie-ratings"
@@ -16,7 +16,7 @@ function Rating(props) {
         </div>
       ))
       }
-    </div>
+    </>
   )
 }
 
