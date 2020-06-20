@@ -29,6 +29,7 @@ input {
 }
 
 .button {
+  display: grid;
   margin: 10px;
   background: var(--orange);
   /* background: linear-gradient(to right, var(--orange), var(--platinum), var(--oxford-blue)); */
@@ -40,6 +41,8 @@ input {
   font-family: "Anton", sans-serif;
   letter-spacing: 1px;
   font-size: 1.5rem;
+  align-content: center;
+  justify-content: center;
 }
 
 .button:hover {
@@ -49,6 +52,7 @@ input {
 
 .prev-button {
   grid-column: 1;
+  width: 10vw;
 }
 
 .current-page {
@@ -62,6 +66,7 @@ input {
 
 .next-button {
   grid-column: 3;
+  width: 10vw;
 }
 
 img {

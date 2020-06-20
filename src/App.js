@@ -10,7 +10,7 @@ function App() {
   const [movieToFind, setMovieToFind] = React.useState("");
   const [movieNotFound, setMovieNotFound] = React.useState("showMovies");
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [nextPage, setNextPage] = React.useState(false)
+  const [nextPage, setNextPage] = React.useState(false);
 
   const getMovies = async (e) => {
     e.preventDefault();
@@ -28,7 +28,6 @@ function App() {
     if (movieToFind === '') {
       return
     } else {
-      
       fetch(
         `https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&s=${movieToFind}&page=${currentPage}`
         )
@@ -142,7 +141,11 @@ function App() {
             <button
             className="button prev-button"
             name={parseInt(currentPage - 1)}
-            onClick={getPreviousPage}>Previous Page</button>
+            onClick={getPreviousPage}>
+              <span class="material-icons">
+                navigate_before
+              </span>
+            </button>
           }
           {
             currentPage > 1 &&
@@ -153,7 +156,9 @@ function App() {
               className="button next-button"
               name={parseInt(currentPage + 1)}
               onClick={getNextPage}>
-                Next
+                <span class="material-icons">
+                  navigate_next
+                </span>
             </button>
           }
         </div>
