@@ -70,7 +70,7 @@ function MovieList (props) {
                 <p>{movieDetails.Plot}</p> : 
                 <> </>
               }
-
+              <p><span className="movie-details-label">Starring </span>{movieDetails.Actors}</p>
               <p>
                 <span className="movie-details-label">Genre </span>
                 {movieDetails.Genre}
@@ -91,13 +91,15 @@ function MovieList (props) {
               }
               <button 
                 onClick={hideMovieDetails}
-                className="button">Show Less</button>
+                className="button"
+                aria-label="Show Less">Show Less</button>
             </div> 
             :
             <button 
               name={imdbID} 
               onClick={getMovieDetails}
-              className="button">Show More</button>
+              className="button"
+              aria-label="Show More">Show More</button>
           }
         </div>
       

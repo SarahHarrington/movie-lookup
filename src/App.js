@@ -115,7 +115,9 @@ function App() {
         <input 
           type="submit" 
           value="Find Movie"
-          className="button"/>
+          className="button"
+          aria-label="submit search"
+        />
       </form>
       <div className="movie-list">
         {movieNotFound === "showMovies" ?
@@ -127,7 +129,7 @@ function App() {
               /> 
               )) :
           <div className="movie-not-found slide-in">
-            <span class="material-icons movie-not-found">
+            <span className="material-icons movie-not-found">
               confirmation_number
             </span>
             <p>No Movies Found!</p>
@@ -141,8 +143,10 @@ function App() {
             <button
             className="button prev-button"
             name={parseInt(currentPage - 1)}
-            onClick={getPreviousPage}>
-              <span class="material-icons">
+            onClick={getPreviousPage}
+            aria-label="Previous Page"
+            >
+              <span className="material-icons">
                 navigate_before
               </span>
             </button>
@@ -155,8 +159,10 @@ function App() {
             <button 
               className="button next-button"
               name={parseInt(currentPage + 1)}
-              onClick={getNextPage}>
-                <span class="material-icons">
+              onClick={getNextPage}
+              aria-label="Next Page"
+              >
+                <span className="material-icons">
                   navigate_next
                 </span>
             </button>
