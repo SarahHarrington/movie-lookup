@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import MovieListItem from './components/MovieListItem';
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
@@ -104,9 +104,9 @@ function App() {
         onSubmit={getMovies}>
         <label 
           className="visually-hidden"
-          htmlFor="moviesearchfield"></label>
+        >Search for Movie</label>
         <input
-          type="text"
+          type="search"
           name="moviesearchfield"
           value={inputValue}
           placeholder={movieToFind}

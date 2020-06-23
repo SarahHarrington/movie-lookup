@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Rating from './Rating';
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
 function MovieList (props) {
-  const {Poster, Title, Year, imdbID, Type} = props.movie;
+  const {Poster, Title, Year, imdbID} = props.movie;
   const [movieDetails, setMovieDetails] = React.useState({});
   const [showDetails, setShowDetails] = React.useState(false);
   const [movieIDToSearch, setMovieIdToSearch] = React.useState('');
@@ -40,13 +40,17 @@ function MovieList (props) {
       <div className="movie-poster-wrapper">
         { Poster === 'N/A' ?
           <span className="material-icons movie-icon">movie</span> : 
-          <img className="movie-poster" src={Poster} alt={Title}/>
+          <img 
+            className="movie-poster" 
+            src={Poster} 
+            alt={Title}
+            loading="lazy"/>
         }
 
       </div>
       <div className="movie-details">
         
-          <h1 className="movie-title">{Title} ({Year})</h1>
+          <h2 className="movie-title">{Title} ({Year})</h2>
           
           {showDetails ?  
             <div>
