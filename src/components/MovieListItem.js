@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Rating from './Rating';
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
 function MovieList (props) {
   const {Poster, Title, Year, imdbID} = props.movie;
-  const [movieDetails, setMovieDetails] = React.useState({});
-  const [showDetails, setShowDetails] = React.useState(false);
-  const [movieIDToSearch, setMovieIdToSearch] = React.useState('');
-  const [movieRatings, setMovieRatings] = React.useState(false);
+  const [movieDetails, setMovieDetails] = useState({});
+  const [showDetails, setShowDetails] = useState(false);
+  const [movieIDToSearch, setMovieIdToSearch] = useState('');
+  const [movieRatings, setMovieRatings] = useState(false);
 
   async function getMovieDetails(e) {
     e.preventDefault();

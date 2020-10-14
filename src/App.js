@@ -1,54 +1,53 @@
-import React from "react";
+import React, {useState} from "react";
 import MovieListItem from './components/MovieListItem';
+import MovieSearch from './components/MovieSearch';
+import Loader from './components/Loader';
+import MovieNotFound from './components/MovieNotFound';
+import PreviousButton from "./components/PreviousButton";
+import NextPageButton from "./components/NextPageButton";
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
 function App() {
 
-  const [currentMovies, setCurrentMovies] = React.useState([]);
-  const [inputValue, setInputValue] = React.useState("");
-  const [movieToFind, setMovieToFind] = React.useState("");
-  const [movieNotFound, setMovieNotFound] = React.useState("showMovies");
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [nextPage, setNextPage] = React.useState(false);
+  const [currentMovies, setCurrentMovies] = useState([]);
+  const [movieToFind, setMovieToFind] = useState("");
+  const [movieNotFound, setMovieNotFound] = useState("showMovies");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [nextPage, setNextPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const getMovies = async (e) => {
+  function getMovies(e) {
+    setIsLoading(true);
     e.preventDefault();
-    setMovieToFind(inputValue.trim().toLowerCase());
-    setInputValue("");
     setCurrentPage(1);
     setNextPage(false);
-  };
+    fetch(
+      `https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&s=${movieToFind}&page=${currentPage}`
+      )
+      .then(res => res.json())
+      .then(res => {
+        if (res.Response === 'False') {
+          setMovieNotFound("hide")
+        }
+        else {
+          setMovieNotFound("showMovies")
+          setCurrentMovies(res.Search);
+          checkForNextPage(currentPage + 1);
+        }
+      })
+      .catch(e => console.log("error", e))
+      .finally(() => {
+        setIsLoading(false)
+      })
+    };
 
-  React.useEffect(() => {
-  }, [movieNotFound])
-
-  // Hook that gets the movies from API
-  React.useEffect(() => {
-    if (movieToFind === '') {
-      return
-    } else {
-      fetch(
-        `https://www.omdbapi.com/?&apikey=${REACT_APP_MOVIE_API_KEY}&type=movie&s=${movieToFind}&page=${currentPage}`
-        )
-        .then(res => res.json())
-        .then(res => {
-          if (res.Response === 'False') {
-            setMovieNotFound("hide")
-          }
-          else {
-            setMovieNotFound("showMovies")
-            setCurrentMovies(res.Search);
-            checkForNextPage(currentPage + 1);
-          }
-        })
-        .catch(e => console.log("error", e));
-      }
-    // }
-  }, [movieToFind]);
+  // useEffect(() => {
+  // }, [movieNotFound])
 
   function getNextPage(e) {
     e.preventDefault();
+    setIsLoading(true)
     getMoreMovies(e.currentTarget.name)
   }
 
@@ -57,6 +56,7 @@ function App() {
     if (e.currentTarget.name === 0) {
       return
     } else {
+      setIsLoading(true)
       getMoreMovies(e.currentTarget.name)
     }
   }
@@ -92,6 +92,13 @@ function App() {
         }
       })
       .catch(e => console.log('Something went wrong!'))
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }
+
+  function handleMovieSearchInput(event) {
+    setMovieToFind(event.target.value.trim().toLowerCase())
   }
 
   return (
@@ -99,73 +106,43 @@ function App() {
       <header>
         <h1>Find a Movie</h1>
       </header>
-      <form 
-        className="search-form"
-        onSubmit={getMovies}>
-        <label 
-          className="visually-hidden"
-        >Search for Movie</label>
-        <input
-          type="search"
-          name="moviesearchfield"
-          value={inputValue}
-          placeholder={movieToFind}
-          onChange={e => setInputValue(e.target.value)}
-        />
-        <input 
-          type="submit" 
-          value="Find Movie"
-          className="button"
-          aria-label="submit search"
-        />
-      </form>
-      <div className="movie-list">
-        {movieNotFound === "showMovies" ?
-            currentMovies.length > 0 && 
-            currentMovies.map(movie => (
-              <MovieListItem 
-              key={movie.imdbID}
-              movie={movie}
-              /> 
-              )) :
-          <div className="movie-not-found slide-in">
-            <span className="material-icons movie-not-found">
-              confirmation_number
-            </span>
-            <p>No Movies Found!</p>
-          </div>
-        }
-      </div>
+      <MovieSearch 
+        onHandleChange={handleMovieSearchInput}
+        movieToFind={movieToFind}
+        onGetMovies={getMovies}
+      />
+      {isLoading ? <Loader /> : 
+        <div className="movie-list">
+          {movieNotFound === "showMovies" ?
+              currentMovies && 
+              currentMovies.map(movie => (
+                <MovieListItem 
+                  key={movie.imdbID}
+                  movie={movie}
+                /> 
+                )) :
+            <MovieNotFound />
+          }
+        </div>      
+      }
 
       {movieToFind !== '' &&
         <div className="movie-pages">
           {parseInt(currentPage) !== 1 && 
-            <button
-            className="button prev-button"
-            name={parseInt(currentPage - 1)}
-            onClick={getPreviousPage}
-            aria-label="Previous Page"
-            >
-              <span className="material-icons">
-                navigate_before
-              </span>
-            </button>
+            <PreviousButton 
+              onGetPreviousPage={getPreviousPage}
+              currentPage={currentPage}
+            />
           }
           {
             currentPage > 1 &&
             <p className="current-page">{currentPage}</p>
           }
           {nextPage &&
-            <button 
-              className="button next-button"
-              name={parseInt(currentPage + 1)}
-              onClick={getNextPage}
-              aria-label="Next Page"
-              >
-                <span className="material-icons">
-                  navigate_next
-                </span>
-            </button>
+            <NextPageButton 
+              onGetNextPage={getNextPage}
+              currentPage={currentPage}
+            />
           }
         </div>
       }
