@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import Rating from './Rating';
+import React, {useState} from 'react';
 import MoviePoster from './MoviePoster';
 import MovieItemDetails from './MovieItemDetails';
 
