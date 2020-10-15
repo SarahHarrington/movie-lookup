@@ -13,3 +13,6 @@ This is a work in progress, here's some stuff I'd like to add:
 - [x] Improved styling!
 - [x] Hit enter to search
 - [x] Movie search pagination
+
+Things I used:
+https://tobiasahlin.com/spinkit/

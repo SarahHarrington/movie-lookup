@@ -42,9 +42,6 @@ function App() {
       })
     };
 
-  // useEffect(() => {
-  // }, [movieNotFound])
-
   function getNextPage(e) {
     e.preventDefault();
     setIsLoading(true)

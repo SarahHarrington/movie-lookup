@@ -1,19 +1,16 @@
 import React from 'react';
 
-function Poster(props) {
-  const { poster, title } = props;
+export default function MoviePoster(props) {
   return (
     <div className="movie-poster-wrapper">
-      { poster === 'N/A' ?
+      { props.poster === 'N/A' ?
         <span className="material-icons movie-icon">movie</span> : 
         <img 
           className="movie-poster" 
-          src={poster} 
-          alt={title}
+          src={props.poster} 
+          alt={props.title}
           loading="lazy"/>
       } 
     </div>
   )
 }
-
-export default Poster;
