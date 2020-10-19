@@ -3,8 +3,7 @@ import MovieListItem from './components/MovieListItem';
 import MovieSearch from './components/MovieSearch';
 import Loader from './components/Loader';
 import MovieNotFound from './components/MovieNotFound';
-import PreviousButton from "./components/PreviousButton";
-import NextPageButton from "./components/NextPageButton";
+import Button from './components/Button';
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
@@ -126,9 +125,12 @@ function App() {
       {movieToFind !== '' &&
         <div className="movie-pages">
           {parseInt(currentPage) !== 1 && 
-            <PreviousButton 
-              onGetPreviousPage={getPreviousPage}
-              currentPage={currentPage}
+            <Button 
+              styles={'button prev-button'}
+              onClick={getPreviousPage}
+              name={parseInt(currentPage - 1)}
+              icon={'navigate_before'}
+              label={'Previous Page'}
             />
           }
           {
@@ -136,9 +138,12 @@ function App() {
             <p className="current-page">{currentPage}</p>
           }
           {nextPage &&
-            <NextPageButton 
-              onGetNextPage={getNextPage}
-              currentPage={currentPage}
+            <Button 
+              styles={'button next-button'}
+              onClick={getNextPage}
+              name={parseInt(currentPage + 1)}
+              icon={'navigate_next'}
+              label={'Next Page'}
             />
           }
         </div>

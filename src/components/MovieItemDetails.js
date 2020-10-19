@@ -1,5 +1,6 @@
 import React from 'react';
 import Rating from './Rating';
+import Button from './Button';
 
 export default function MovieItemDetails(props) {
   const {movieDetails, onClick, movieRatings} = props;
@@ -38,16 +39,14 @@ export default function MovieItemDetails(props) {
       {movieDetails.Writer !== 'N/A' &&
         <p><span className="movie-details-label">Written by </span>{movieDetails.Writer}</p>
       }
-      {movieRatings ? 
-        <>
-          <Rating ratings={movieDetails.Ratings}/> 
-        </> :
-        <></>
+      {movieRatings && 
+          <Rating ratings={movieDetails.Ratings}/>
       }
-      <button 
+      <Button 
+        styles={'button'}
+        label={'Show Less'}
         onClick={onClick}
-        className="button"
-        aria-label="Show Less">Show Less</button>
+      />
     </div> 
   )
 }

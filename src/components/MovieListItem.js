@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import MoviePoster from './MoviePoster';
 import MovieItemDetails from './MovieItemDetails';
+import Button from './Button';
 
 const REACT_APP_MOVIE_API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 
@@ -43,11 +44,12 @@ function MovieList (props) {
               movieRatings={movieRatings}
             />
             :
-            <button 
-              name={imdbID} 
+            <Button 
+              name={imdbID}
               onClick={getMovieDetails}
-              className="button"
-              aria-label="Show More">Show More</button>
+              styles={'button'}
+              label={'Show More'}
+            />
           }
         </div>
       
